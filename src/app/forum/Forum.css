@@ -1,0 +1,264 @@
+.forum-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.forum-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.forum-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.forum-subtitle {
+  color: #9ca3af;
+  margin-top: 0.5rem;
+}
+
+.icon-violet { color: #a78bfa; }
+.icon-cyan { color: #22d3ee; }
+
+.forum-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .forum-grid {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+.forum-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.thread-card {
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.thread-card:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.thread-content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.thread-info {
+  flex: 1;
+}
+
+.thread-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.thread-category {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background-color: rgba(139, 92, 246, 0.2);
+  color: #c4b5fd;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.thread-author-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.thread-author {
+  color: #d1d5db;
+}
+
+.thread-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.thread-card:hover .thread-title {
+  color: #22d3ee;
+}
+
+.thread-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.thread-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.thread-delete-btn {
+  color: #6b7280;
+  padding: 0.375rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.thread-card:hover .thread-delete-btn {
+  opacity: 1;
+}
+
+.thread-delete-btn:hover {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.no-threads {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 3rem 0;
+  font-size: 0.9rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.forum-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.forum-widget {
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+}
+
+.widget-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.flex-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.category-item:hover {
+  color: white;
+}
+
+.category-count {
+  font-size: 0.75rem;
+  background-color: #1f2937;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid #374151;
+}
+
+.highlight-widget {
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  background: linear-gradient(to bottom, rgba(34, 211, 238, 0.1), transparent);
+}
+
+.guidelines-text {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  line-height: 1.625;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.15s ease;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 540px;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.modal-close {
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: white;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
