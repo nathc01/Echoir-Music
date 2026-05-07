@@ -13,7 +13,7 @@ function formatTime(seconds: number) {
 }
 
 export default function BottomPlayer() {
-  const { currentTrack, isPlaying, progress, duration, volume, togglePlayPause, seek, setVolumeLevel } = usePlayer();
+  const { currentTrack, isPlaying, progress, duration, volume, togglePlayPause, seek, setVolumeLevel, skipNext, skipPrevious, toggleShuffle, toggleRepeat, isShuffle, isRepeat } = usePlayer();
   const progressRef = useRef<HTMLDivElement>(null);
   const volumeRef = useRef<HTMLDivElement>(null);
 
@@ -60,8 +60,8 @@ export default function BottomPlayer() {
       {/* Controls */}
       <div className="player-controls">
         <div className="controls-buttons">
-          <button className="control-btn secondary"><Shuffle size={18} /></button>
-          <button className="control-btn primary"><SkipBack size={22} fill="currentColor" /></button>
+          <button className={`control-btn secondary ${isShuffle ? 'active' : ''}`} onClick={toggleShuffle} style={{ color: isShuffle ? '#8b5cf6' : 'inherit' }}><Shuffle size={18} /></button>
+          <button className="control-btn primary" onClick={skipPrevious}><SkipBack size={22} fill="currentColor" /></button>
           <button 
             className="play-btn"
             onClick={togglePlayPause}
@@ -69,8 +69,8 @@ export default function BottomPlayer() {
           >
             {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="play-icon-offset" />}
           </button>
-          <button className="control-btn primary"><SkipForward size={22} fill="currentColor" /></button>
-          <button className="control-btn secondary"><Repeat size={18} /></button>
+          <button className="control-btn primary" onClick={skipNext}><SkipForward size={22} fill="currentColor" /></button>
+          <button className={`control-btn secondary ${isRepeat ? 'active' : ''}`} onClick={toggleRepeat} style={{ color: isRepeat ? '#8b5cf6' : 'inherit' }}><Repeat size={18} /></button>
         </div>
         
         {/* Progress Bar */}

@@ -7,7 +7,7 @@ import './Discover.css';
 
 
 
-const GENRES = ['All', 'Indie Pop', 'Shoegaze', 'Synthwave', 'Indie Rock', 'Dream Pop', 'Alternative', 'Lo-Fi Beats'];
+const GENRES = ['All', 'Indie Pop', 'Shoegaze', 'Synthwave', 'Indie Rock', 'Dream Pop', 'Alternative', 'R&B / Neo-Soul', 'Indie Folk', 'Lo-Fi Beats'];
 
 // Fallback tracks for when the DB is empty
 const FALLBACK_TRACKS = [

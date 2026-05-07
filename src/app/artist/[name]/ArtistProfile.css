@@ -1,0 +1,101 @@
+.artist-profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.artist-hero {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 2rem;
+}
+
+.artist-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.artist-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 15, 19, 1), rgba(15, 15, 19, 0.3));
+  z-index: 2;
+}
+
+.artist-hero-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.artist-avatar-large {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid var(--bg-surface);
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.artist-hero-info {
+  margin-bottom: 1rem;
+}
+
+.artist-hero-name {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.artist-hero-meta {
+  color: #d1d5db;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.artist-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #9ca3af;
+  padding: 0.5rem 0;
+  margin-bottom: -1rem;
+  transition: color 0.2s;
+  width: max-content;
+}
+
+.btn-back:hover {
+  color: white;
+}
+
+.artist-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

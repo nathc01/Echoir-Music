@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { MessageSquare, Users, ThumbsUp, Plus, X, Trash2 } from 'lucide-react';
+import { MessageSquare, Users, ThumbsUp, Plus, Trash2 } from 'lucide-react';
+import Link from 'next/link';
 import './Forum.css';
 
 const CATEGORIES = ['General Discussion', 'Production', 'Collaboration', 'Gear & Tech', 'Business'];
@@ -15,11 +16,6 @@ const FALLBACK_THREADS = [
 export default function Forum() {
   const [threads, setThreads] = useState<any[]>([]);
   const [isFallback, setIsFallback] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [newTitle, setNewTitle] = useState('');
-  const [newContent, setNewContent] = useState('');
-  const [newCategory, setNewCategory] = useState('General Discussion');
-  const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
@@ -42,30 +38,7 @@ export default function Forum() {
     fetchThreads();
   }, []);
 
-  const handlePost = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    try {
-      const guestId = localStorage.getItem('echoir-guest-id') || 'mock-artist-id';
-      const res = await fetch('/api/forum', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: newTitle, content: newContent, category: newCategory, authorId: guestId }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setThreads((prev) => [data.thread, ...prev]);
-        setIsFallback(false);
-        setShowModal(false);
-        setNewTitle('');
-        setNewContent('');
-      }
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  // POST is now handled in /forum/new/page.tsx
 
   const handleDelete = async (threadId: string | number) => {
     const id = String(threadId);
@@ -99,10 +72,10 @@ export default function Forum() {
           <h1 className="forum-title"><MessageSquare className="icon-violet" size={32} />Community Forum</h1>
           <p className="forum-subtitle">Connect with other indie musicians, share tips, and collaborate.</p>
         </div>
-        <button className="btn-primary" onClick={() => setShowModal(true)}>
-          <Plus size={18} style={{ display: 'inline', marginRight: '6px' }} />
+        <Link href="/forum/new" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
+          <Plus size={18} style={{ marginRight: '6px' }} />
           New Discussion
-        </button>
+        </Link>
       </div>
 
       <div className="forum-grid">
@@ -158,35 +131,6 @@ export default function Forum() {
         </div>
       </div>
 
-      {showModal && (
-        <div className="modal-backdrop" onClick={() => setShowModal(false)}>
-          <div className="glass modal-card" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2 className="modal-title">Start a Discussion</h2>
-              <button onClick={() => setShowModal(false)} className="modal-close"><X size={20} /></button>
-            </div>
-            <form onSubmit={handlePost} className="modal-form">
-              <div className="form-group">
-                <label className="form-label">Category</label>
-                <select className="form-select" value={newCategory} onChange={(e) => setNewCategory(e.target.value)}>
-                  {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
-                </select>
-              </div>
-              <div className="form-group">
-                <label className="form-label">Title</label>
-                <input type="text" className="form-input" placeholder="What do you want to discuss?" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} required />
-              </div>
-              <div className="form-group">
-                <label className="form-label">Content</label>
-                <textarea className="form-textarea" placeholder="Share your thoughts..." value={newContent} onChange={(e) => setNewContent(e.target.value)} required />
-              </div>
-              <button type="submit" className="btn-primary" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }} disabled={submitting}>
-                {submitting ? 'Posting...' : 'Post Discussion'}
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

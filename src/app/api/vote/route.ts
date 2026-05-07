@@ -48,6 +48,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'You have already voted this month.', alreadyVoted: true }, { status: 409 });
     }
 
+    // Ensure user exists (for guest votes)
+    const userExists = await prisma.user.findUnique({ where: { id: userId } });
+    if (!userExists) {
+      await prisma.user.create({
+        data: {
+          id: userId,
+          name: `Guest ${userId.slice(0, 4)}`,
+        }
+      });
+    }
+
     const vote = await prisma.vote.create({ data: { userId, trackId, month } });
     return NextResponse.json({ success: true, vote });
   } catch (error) {

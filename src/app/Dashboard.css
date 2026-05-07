@@ -30,7 +30,7 @@
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop');
+  background-image: url('/hero-bg.png');
   background-size: cover;
   background-position: center;
   mix-blend-mode: overlay;

@@ -116,6 +116,9 @@ export default function Upload() {
                   <option>Indie Rock</option>
                   <option>Dream Pop</option>
                   <option>Alternative</option>
+                  <option>R&B / Neo-Soul</option>
+                  <option>Indie Folk</option>
+                  <option>Lo-Fi Beats</option>
                 </select>
               </div>
             </div>
