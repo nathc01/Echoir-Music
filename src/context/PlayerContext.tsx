@@ -8,6 +8,7 @@ type Track = {
   artist: string;
   coverUrl?: string;
   audioUrl: string;
+  lyrics?: string;
 };
 
 interface PlayerContextType {

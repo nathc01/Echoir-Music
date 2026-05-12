@@ -104,12 +104,12 @@ export default function Voting() {
     ? tracks.map((t, i) => ({
         id: t.id,
         rank: i + 1,
-        name: t.artist?.name || 'Unknown',
+        name: t.musicianName || t.artist?.name || 'Unknown',
         track: t.title,
         genre: t.genre,
         votes: t._count?.votes || 0,
         coverUrl: t.coverUrl,
-        audioUrl: t.audioUrl || '', // Use Deezer URL directly
+        audioUrl: t.audioUrl || '',
       }))
     : freshFallback.length > 0
     ? freshFallback

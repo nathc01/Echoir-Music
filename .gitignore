@@ -48,4 +48,4 @@ next-env.d.ts
 .vs/
 *.user
 *.suo
-appsettings.Development.json
+appsettings.Development.jsonvenv/

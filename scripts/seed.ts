@@ -38,13 +38,14 @@ async function main() {
   });
 
   // Seed Tracks
+  // SoundHelix MP3s are free, public domain, and never expire
   const tracks = [
-    { title: 'ceilings', genre: 'Indie Folk', audioUrl: 'https://cdnt-preview.dzcdn.net/api/1/1/0/7/f/0/07fd77af15bc3b6f05ab683b89805d30.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/d0eaf634445f49ad8ee6c9571874e059/500x500-000000-80-0-0.jpg', artistId: lizzy.id, plays: 15400 },
-    { title: 'Evergreen', genre: 'Indie Folk', audioUrl: 'https://cdnt-preview.dzcdn.net/api/1/1/0/7/f/0/07fd77af15bc3b6f05ab683b89805d30.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/d0eaf634445f49ad8ee6c9571874e059/500x500-000000-80-0-0.jpg', artistId: lizzy.id, plays: 12000 },
-    { title: 'Best Part', genre: 'R&B / Neo-Soul', audioUrl: 'https://cdnt-preview.dzcdn.net/api/1/1/a/1/2/0/a122fc6c633aa6a2547c318bc3dcd4ef.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/4dff56488d13d0b5e96d93d895c9624b/500x500-000000-80-0-0.jpg', artistId: daniel.id, plays: 18000 },
-    { title: 'Get You', genre: 'R&B / Neo-Soul', audioUrl: 'https://cdnt-preview.dzcdn.net/api/1/1/c/4/5/0/c45b5eaa64b82de1d6f186adc4dbc53e.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/282e45bef1995c2c6f2901e34c4ab560/500x500-000000-80-0-0.jpg', artistId: daniel.id, plays: 16500 },
-    { title: 'Indigo', genre: 'Indie Pop', audioUrl: 'https://cdnt-preview.dzcdn.net/api/1/1/0/f/4/0/0f467ab1320e9a09d8b2f279a5e5a26b.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/28aeea0a18458309de3004f0bb3cda59/500x500-000000-80-0-0.jpg', artistId: niki.id, plays: 14200 },
-    { title: 'Before', genre: 'Indie Pop', audioUrl: 'https://cdnt-preview.dzcdn.net/api/1/1/8/1/4/0/8144527cbb5fe1ea76a5c1926092c615.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/3f61783ca024dfd8f5cffdf92c55cf19/500x500-000000-80-0-0.jpg', artistId: niki.id, plays: 13800 },
+    { title: 'ceilings', genre: 'Indie Folk', audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/d0eaf634445f49ad8ee6c9571874e059/500x500-000000-80-0-0.jpg', artistId: lizzy.id, plays: 15400 },
+    { title: 'Evergreen', genre: 'Indie Folk', audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/d0eaf634445f49ad8ee6c9571874e059/500x500-000000-80-0-0.jpg', artistId: lizzy.id, plays: 12000 },
+    { title: 'Best Part', genre: 'R&B / Neo-Soul', audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/4dff56488d13d0b5e96d93d895c9624b/500x500-000000-80-0-0.jpg', artistId: daniel.id, plays: 18000 },
+    { title: 'Get You', genre: 'R&B / Neo-Soul', audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/282e45bef1995c2c6f2901e34c4ab560/500x500-000000-80-0-0.jpg', artistId: daniel.id, plays: 16500 },
+    { title: 'Indigo', genre: 'Indie Pop', audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/28aeea0a18458309de3004f0bb3cda59/500x500-000000-80-0-0.jpg', artistId: niki.id, plays: 14200 },
+    { title: 'Before', genre: 'Indie Pop', audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', coverUrl: 'https://cdn-images.dzcdn.net/images/cover/3f61783ca024dfd8f5cffdf92c55cf19/500x500-000000-80-0-0.jpg', artistId: niki.id, plays: 13800 },
   ];
 
   for (const t of tracks) {

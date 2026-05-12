@@ -1,9 +1,10 @@
 'use client';
 
-import { Play, Pause, SkipBack, SkipForward, Volume2, Shuffle, Repeat, Mic2 } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, Shuffle, Repeat, Mic2, FileText } from 'lucide-react';
 import './BottomPlayer.css';
 import { usePlayer } from '@/context/PlayerContext';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import LyricsModal from './LyricsModal';
 
 function formatTime(seconds: number) {
   if (isNaN(seconds)) return '0:00';
@@ -16,6 +17,12 @@ export default function BottomPlayer() {
   const { currentTrack, isPlaying, progress, duration, volume, togglePlayPause, seek, setVolumeLevel, skipNext, skipPrevious, toggleShuffle, toggleRepeat, isShuffle, isRepeat } = usePlayer();
   const progressRef = useRef<HTMLDivElement>(null);
   const volumeRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const [showLyrics, setShowLyrics] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (progressRef.current && duration) {
@@ -65,7 +72,7 @@ export default function BottomPlayer() {
           <button 
             className="play-btn"
             onClick={togglePlayPause}
-            disabled={!currentTrack}
+            disabled={!mounted || !currentTrack}
           >
             {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="play-icon-offset" />}
           </button>
@@ -91,7 +98,24 @@ export default function BottomPlayer() {
         <div className="volume-bar-wrapper" ref={volumeRef} onClick={handleVolumeClick}>
           <div className="volume-bar-fill" style={{ width: `${volumePercent}%` }}></div>
         </div>
+        <button
+          className={`lyrics-toggle-btn ${showLyrics ? 'active' : ''}`}
+          onClick={() => setShowLyrics(prev => !prev)}
+          title="Tampilkan Lirik"
+          disabled={!mounted || !currentTrack}
+        >
+          <FileText size={18} />
+        </button>
       </div>
+
+      <LyricsModal
+        isOpen={showLyrics}
+        onClose={() => setShowLyrics(false)}
+        title={currentTrack?.title || ''}
+        artist={currentTrack?.artist || ''}
+        lyrics={currentTrack?.lyrics}
+        coverUrl={currentTrack?.coverUrl}
+      />
       
     </div>
   );

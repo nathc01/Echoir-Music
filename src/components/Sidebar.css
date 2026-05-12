@@ -15,8 +15,23 @@
 .sidebar-brand {
   display: flex;
   align-items: center;
-  margin-bottom: 2.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
   text-decoration: none;
+}
+
+.brand-wordmark {
+  font-size: 1.75rem;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  transition: opacity 0.2s ease;
+  user-select: none;
+}
+
+.sidebar-brand:hover .brand-wordmark {
+  opacity: 0.75;
 }
 
 .brand-text {
@@ -144,4 +159,48 @@
   .sidebar {
     display: none;
   }
+}
+
+/* ── Role Badges ───────────────────────────────────────────────── */
+.role-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.role-admin {
+  background: rgba(234, 179, 8, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.role-artist {
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.role-listener {
+  background: rgba(6, 182, 212, 0.1);
+  color: #67e8f9;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* ── Admin Nav Item ─────────────────────────────────────────────── */
+.nav-item-admin {
+  color: #fbbf24;
+}
+
+.nav-item-admin:hover {
+  color: #fde68a;
+  background-color: rgba(234, 179, 8, 0.08);
+}
+
+.nav-item-admin.active {
+  background-color: rgba(234, 179, 8, 0.15);
+  border-color: rgba(234, 179, 8, 0.3);
+  color: #fbbf24;
 }

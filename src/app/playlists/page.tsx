@@ -87,7 +87,7 @@ export default function Playlists() {
       const queueTracks = pl.tracks.map((t: any) => ({
         id: t.id,
         title: t.title,
-        artist: t.artist?.name || 'Unknown',
+        artist: t.musicianName || t.artist?.name || 'Unknown',
         audioUrl: t.audioUrl,
         coverUrl: t.coverUrl
       }));
@@ -123,7 +123,7 @@ export default function Playlists() {
                   const queueTracks = selectedPlaylist.tracks.map((t: any) => ({
                     id: t.id,
                     title: t.title,
-                    artist: t.artist?.name || 'Unknown',
+                    artist: t.musicianName || t.artist?.name || 'Unknown',
                     audioUrl: t.audioUrl,
                     coverUrl: t.coverUrl
                   }));
@@ -143,7 +143,7 @@ export default function Playlists() {
                 </div>
                 <div className="track-info">
                   <h4 className="track-name">{track.title}</h4>
-                  <p className="track-artist-name">{track.artist?.name || 'Unknown'}</p>
+                  <p className="track-artist-name">{track.musicianName || track.artist?.name || 'Unknown'}</p>
                 </div>
                 <div className="track-time">
                   -

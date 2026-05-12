@@ -219,3 +219,31 @@
 .volume-bar-wrapper:hover .volume-bar-fill {
   background-color: var(--accent-primary);
 }
+
+.lyrics-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+
+.lyrics-toggle-btn:hover:not(:disabled) {
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.lyrics-toggle-btn.active {
+  color: var(--accent-primary);
+}
+
+.lyrics-toggle-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}

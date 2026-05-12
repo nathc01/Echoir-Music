@@ -19,6 +19,10 @@ import { PlayerProvider } from '@/context/PlayerContext';
 export const metadata: Metadata = {
   title: 'Echoir | Indie Music Platform',
   description: 'A platform dedicated to indie musicians and listeners',
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({

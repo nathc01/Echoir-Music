@@ -2,18 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Home, MessageSquare, Upload, Trophy, ListMusic, Compass, User, LogOut, LogIn } from 'lucide-react';
+import { Home, MessageSquare, Upload, Trophy, ListMusic, Compass, User, LogOut, LogIn, ShieldCheck } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import './Sidebar.css';
-
-const navItems = [
-  { name: 'Dashboard', path: '/', icon: Home },
-  { name: 'Discover', path: '/discover', icon: Compass },
-  { name: 'Forum', path: '/forum', icon: MessageSquare },
-  { name: 'Upload', path: '/upload', icon: Upload },
-  { name: 'Voting', path: '/voting', icon: Trophy },
-  { name: 'Playlists', path: '/playlists', icon: ListMusic },
-];
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -23,21 +14,47 @@ export default function Sidebar() {
   const isAuthPage = pathname === '/login' || pathname === '/register';
   if (isAuthPage) return null;
 
+  const role = (session?.user as any)?.role as string | undefined;
+  const isAdmin = role === 'ADMIN';
+  const isArtistOrAdmin = role === 'ARTIST' || role === 'ADMIN';
+
+  const navItems = [
+    { name: 'Dashboard', path: '/', icon: Home, show: true },
+    { name: 'Discover', path: '/discover', icon: Compass, show: true },
+    { name: 'Forum', path: '/forum', icon: MessageSquare, show: true },
+    { name: 'Upload', path: '/upload', icon: Upload, show: isArtistOrAdmin },
+    { name: 'Voting', path: '/voting', icon: Trophy, show: true },
+    { name: 'Playlists', path: '/playlists', icon: ListMusic, show: true },
+    { name: 'Admin Panel', path: '/admin', icon: ShieldCheck, show: isAdmin },
+  ];
+
+  const roleBadgeLabel: Record<string, string> = {
+    ADMIN: 'Admin',
+    ARTIST: 'Artist',
+    LISTENER: 'Listener',
+  };
+
+  const roleBadgeClass: Record<string, string> = {
+    ADMIN: 'role-badge role-admin',
+    ARTIST: 'role-badge role-artist',
+    LISTENER: 'role-badge role-listener',
+  };
+
   return (
     <aside className="sidebar glass">
       <div className="sidebar-top">
         <Link href="/" className="sidebar-brand">
-          <h1 className="brand-text">echoir</h1>
+          <span className="brand-wordmark">echoir</span>
         </Link>
         
         <nav className="sidebar-nav">
-          {navItems.map((item) => {
+          {navItems.filter(item => item.show).map((item) => {
             const isActive = pathname === item.path || (pathname.startsWith(item.path) && item.path !== '/');
             return (
               <Link 
                 key={item.name} 
                 href={item.path}
-                className={`nav-item ${isActive ? 'active' : ''}`}
+                className={`nav-item ${isActive ? 'active' : ''} ${item.name === 'Admin Panel' ? 'nav-item-admin' : ''}`}
               >
                 <item.icon size={20} className="nav-icon" />
                 <span>{item.name}</span>
@@ -60,7 +77,13 @@ export default function Sidebar() {
               </div>
               <div className="user-info">
                 <p className="user-name">{session.user.name || 'User'}</p>
-                <p className="user-action">{session.user.email}</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {role && (
+                    <span className={roleBadgeClass[role] || 'role-badge role-listener'}>
+                      {roleBadgeLabel[role] || role}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
             <button

@@ -28,7 +28,9 @@ export default function ArtistProfile() {
         const res = await fetch('/api/tracks');
         const data = await res.json();
         if (data.success) {
-          const artistTracks = data.tracks.filter((t: any) => t.artist?.name === artistName);
+          const artistTracks = data.tracks.filter((t: any) =>
+            t.musicianName === artistName || t.artist?.name === artistName
+          );
           setTracks(artistTracks);
         }
       } catch (error) {
@@ -43,7 +45,7 @@ export default function ArtistProfile() {
       const queueTracks = tracks.map(t => ({
         id: t.id,
         title: t.title,
-        artist: t.artist?.name || 'Unknown Artist',
+        artist: t.musicianName || t.artist?.name || 'Unknown Artist',
         audioUrl: t.audioUrl,
         coverUrl: t.coverUrl
       }));
@@ -93,10 +95,10 @@ export default function ArtistProfile() {
                 onClick={() => playTrack({
                   id: track.id,
                   title: track.title,
-                  artist: track.artist?.name || 'Unknown',
+                  artist: track.musicianName || track.artist?.name || 'Unknown',
                   audioUrl: track.audioUrl,
                   coverUrl: track.coverUrl
-                }, tracks.map(t => ({ id: t.id, title: t.title, artist: t.artist?.name || 'Unknown', audioUrl: t.audioUrl, coverUrl: t.coverUrl })))}
+                }, tracks.map(t => ({ id: t.id, title: t.title, artist: t.musicianName || t.artist?.name || 'Unknown', audioUrl: t.audioUrl, coverUrl: t.coverUrl })))}
               >
                 <div className="track-card-cover">
                   {track.coverUrl && <img src={track.coverUrl} alt={track.title} className="track-card-img" />}
@@ -113,7 +115,7 @@ export default function ArtistProfile() {
                 </div>
                 <div className="track-card-info">
                   <h4 className="track-card-title">{track.title}</h4>
-                  <p className="track-card-artist">{track.artist?.name || 'Unknown Artist'}</p>
+                  <p className="track-card-artist">{track.musicianName || track.artist?.name || 'Unknown Artist'}</p>
                 </div>
               </div>
             );
