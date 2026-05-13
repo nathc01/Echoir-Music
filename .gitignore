@@ -49,3 +49,6 @@ next-env.d.ts
 *.user
 *.suo
 appsettings.Development.jsonvenv/
+node_modules/
+venv/
+.next/

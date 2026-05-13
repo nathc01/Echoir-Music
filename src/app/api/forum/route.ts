@@ -17,13 +17,29 @@ export async function DELETE(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const musicianName = searchParams.get('musicianName');
+    
+    const whereClause = musicianName ? { musicianName } : {};
+
     const threads = await prisma.thread.findMany({
-      include: { author: { select: { name: true } } },
+      where: whereClause,
+      include: { 
+        author: { select: { id: true, name: true } },
+        _count: { select: { replies: true } }
+      },
       orderBy: { createdAt: 'desc' },
     });
-    return NextResponse.json({ success: true, threads });
+
+    const formattedThreads = threads.map(t => ({
+      ...t,
+      replies: t._count.replies,
+      _count: undefined
+    }));
+
+    return NextResponse.json({ success: true, threads: formattedThreads });
   } catch (error) {
     console.error('Forum GET error:', error);
     return NextResponse.json({ error: 'Failed to fetch threads.' }, { status: 500 });
@@ -32,13 +48,13 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const { title, content, category, authorId } = await request.json();
+    const { title, content, category, authorId, musicianName } = await request.json();
     if (!title || !content || !authorId) {
       return NextResponse.json({ error: 'Title, content and author are required.' }, { status: 400 });
     }
     const thread = await prisma.thread.create({
-      data: { title, content, category: category || 'General Discussion', authorId },
-      include: { author: { select: { name: true } } },
+      data: { title, content, category: category || 'General Discussion', authorId, musicianName: musicianName || null },
+      include: { author: { select: { id: true, name: true } } },
     });
     return NextResponse.json({ success: true, thread });
   } catch (error) {

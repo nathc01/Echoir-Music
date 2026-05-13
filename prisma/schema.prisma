@@ -63,9 +63,14 @@ model User {
   accounts  Account[]
   sessions  Session[]
   tracks    Track[]
-  threads   Thread[]
-  playlists Playlist[]
-  votes     Vote[]
+  threads             Thread[]
+  replies             Reply[]
+  playlists           Playlist[]
+  votes               Vote[]
+  sentFriendships     Friendship[] @relation("SentFriendships")
+  receivedFriendships Friendship[] @relation("ReceivedFriendships")
+  sentMessages        Message[]    @relation("SentMessages")
+  receivedMessages    Message[]    @relation("ReceivedMessages")
 }
 
 model Track {
@@ -87,16 +92,31 @@ model Track {
 }
 
 model Thread {
+  id           String   @id @default(cuid())
+  title        String
+  content      String
+  category     String
+  musicianName String?
+  views        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  authorId     String
+  author       User     @relation(fields: [authorId], references: [id])
+  replies      Reply[]
+}
+
+model Reply {
   id        String   @id @default(cuid())
-  title     String
   content   String
-  category  String
-  views     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  authorId String
-  author   User   @relation(fields: [authorId], references: [id])
+  authorId  String
+  author    User   @relation(fields: [authorId], references: [id])
+  
+  threadId  String
+  thread    Thread @relation(fields: [threadId], references: [id], onDelete: Cascade)
 }
 
 model Vote {
@@ -122,4 +142,31 @@ model Playlist {
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
+}
+
+model Friendship {
+  id         String   @id @default(cuid())
+  status     String   @default("PENDING") // "PENDING", "ACCEPTED"
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  senderId   String
+  sender     User     @relation("SentFriendships", fields: [senderId], references: [id], onDelete: Cascade)
+  
+  receiverId String
+  receiver   User     @relation("ReceivedFriendships", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@unique([senderId, receiverId])
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  content    String
+  createdAt  DateTime @default(now())
+
+  senderId   String
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  
+  receiverId String
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
 }

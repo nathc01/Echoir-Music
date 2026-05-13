@@ -86,9 +86,11 @@ export default function Forum() {
                 <div className="thread-info">
                   <div className="thread-meta">
                     <span className="thread-category">{thread.category}</span>
-                    <span className="thread-author-label">Posted by <span className="thread-author">{thread.author?.name || 'Unknown'}</span></span>
+                    <span className="thread-author-label">Posted by <Link href={`/user/${thread.author?.id || ''}`} style={{ color: 'var(--text-primary)', textDecoration: 'none' }} className="thread-author">{thread.author?.name || 'Unknown'}</Link></span>
                   </div>
-                  <h3 className="thread-title">{thread.title}</h3>
+                  <Link href={`/forum/${thread.id}`} style={{ textDecoration: 'none' }}>
+                    <h3 className="thread-title" style={{ cursor: 'pointer' }}>{thread.title}</h3>
+                  </Link>
                 </div>
                 <div className="thread-actions">
                   <div className="thread-stats">

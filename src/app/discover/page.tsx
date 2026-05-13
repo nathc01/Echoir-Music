@@ -14,9 +14,6 @@ const FEATURED_ARTISTS = [
   { id: 1, name: 'Lizzy McAlpine', genre: 'Indie Folk', avatarUrl: 'https://cdn-images.dzcdn.net/images/artist/b5c5ce7b4520dd1c6ad07587bf9e17fa/500x500-000000-80-0-0.jpg' },
   { id: 2, name: 'Daniel Caesar', genre: 'R&B / Neo-Soul', avatarUrl: 'https://cdn-images.dzcdn.net/images/artist/973809864ad1c52d8c61238662400089/500x500-000000-80-0-0.jpg' },
   { id: 3, name: 'NIKI', genre: 'Indie Pop', avatarUrl: 'https://cdn-images.dzcdn.net/images/artist/324c50c04a5a944117cd3daa0963fc63/500x500-000000-80-0-0.jpg' },
-  { id: 4, name: 'beabadoobee', genre: 'Indie Rock', avatarUrl: 'https://cdn-images.dzcdn.net/images/artist/11c2105e468307b2759a2245c614b64b/500x500-000000-80-0-0.jpg' },
-  { id: 5, name: 'Phoebe Bridgers', genre: 'Indie Folk', avatarUrl: 'https://cdn-images.dzcdn.net/images/artist/41d6b5ea0ffbf02148a5c0d9bdc0fe6e/500x500-000000-80-0-0.jpg' },
-  { id: 6, name: 'Clairo', genre: 'Indie Pop', avatarUrl: 'https://cdn-images.dzcdn.net/images/artist/eaf04c8e2efc5c34e4a5dbf5e6f0e9e1/500x500-000000-80-0-0.jpg' },
 ];
 
 // Fallback tracks for when the DB is empty

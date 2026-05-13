@@ -14,6 +14,7 @@ export default function NewDiscussion() {
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
   const [newCategory, setNewCategory] = useState('General Discussion');
+  const [musicianName, setMusicianName] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -41,6 +42,7 @@ export default function NewDiscussion() {
           title: newTitle,
           content: newContent,
           category: newCategory,
+          musicianName,
           authorId,
         }),
       });
@@ -135,6 +137,19 @@ export default function NewDiscussion() {
               autoFocus
               style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--border-color)', color: 'white', outline: 'none' }}
             />
+          </div>
+
+          <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label className="form-label" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Musician / Artist Name (Optional)</label>
+            <input 
+              type="text" 
+              className="form-input" 
+              placeholder="e.g. Lizzy McAlpine, NIKI, Daniel Caesar" 
+              value={musicianName} 
+              onChange={(e) => setMusicianName(e.target.value)} 
+              style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--border-color)', color: 'white', outline: 'none' }}
+            />
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>If this discussion is about a specific artist, it will show up on their profile.</span>
           </div>
 
           <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>

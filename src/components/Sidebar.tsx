@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Home, MessageSquare, Upload, Trophy, ListMusic, Compass, User, LogOut, LogIn, ShieldCheck } from 'lucide-react';
+import { Home, MessageSquare, Upload, Trophy, ListMusic, Compass, User, LogOut, LogIn, ShieldCheck, FileText, Users, MessageCircle } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import './Sidebar.css';
 
@@ -22,9 +22,12 @@ export default function Sidebar() {
     { name: 'Dashboard', path: '/', icon: Home, show: true },
     { name: 'Discover', path: '/discover', icon: Compass, show: true },
     { name: 'Forum', path: '/forum', icon: MessageSquare, show: true },
+    { name: 'Network', path: '/network', icon: Users, show: !!session?.user },
+    { name: 'Messages', path: '/chat', icon: MessageCircle, show: !!session?.user },
     { name: 'Upload', path: '/upload', icon: Upload, show: isArtistOrAdmin },
     { name: 'Voting', path: '/voting', icon: Trophy, show: true },
     { name: 'Playlists', path: '/playlists', icon: ListMusic, show: true },
+    { name: 'Terms & Conditions', path: '/terms', icon: FileText, show: true },
     { name: 'Admin Panel', path: '/admin', icon: ShieldCheck, show: isAdmin },
   ];
 
